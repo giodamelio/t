@@ -30,3 +30,6 @@ remove.add_argument("session",
 args = parser.parse_args()
 print(args)
 
+import tmux_t
+tmux_t.test()
+
