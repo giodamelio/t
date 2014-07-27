@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import argparse
+import tmux_t
 
 # Parse the arguments
 parser = argparse.ArgumentParser(description="t, The simple tmux helper")
@@ -26,10 +27,10 @@ remove.add_argument("session",
         metavar="session",
         help="Session name")
 
-
+# Parse the args
 args = parser.parse_args()
-print(args)
 
-import tmux_t
-tmux_t.test()
+# List the tmux sessions
+if args.command in ["list", "ls"]:
+    print("\n".join(tmux_t.list_sessions()));
 
