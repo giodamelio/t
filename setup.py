@@ -8,5 +8,8 @@ setup(name="tmux_t",
       author_email="giodamelio@gmail.com",
       packages=["tmux_t"],
       scripts=["t"],
+      install_requires=[
+          "tmuxp",
+      ],
       license="MIT",
       zip_safe=False)
