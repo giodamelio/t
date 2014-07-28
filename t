@@ -1,47 +1,26 @@
 #!/usr/bin/python3
+"""
+t, The simple tmux helper
+
+Usage:
+    t [list | ls] [session_name]
+    t [attach | a] [session_name]
+    t [new | n] [session_name]
+    t [remove | rm] [session_name]
+
+Options:
+    -v, --version   Print the version
+    -h, --help      Print this help
+
+"""
 import argparse
 import os
 
+from docopt import docopt
 import tmuxp
 
-# Parse the arguments
-parser = argparse.ArgumentParser(description="t, The simple tmux helper")
-subparsers = parser.add_subparsers(dest="command")
-
-# List
-checkout = subparsers.add_parser("list",
-        aliases=["ls"],
-        help="List sessions")
-
-# Attach
-attach = subparsers.add_parser("attach",
-        aliases=["a"],
-        help="Attach to session by name")
-attach.add_argument("session",
-        metavar="session",
-        nargs="?",
-        help="Session name")
-
-# New
-new = subparsers.add_parser("new",
-        aliases=["n"],
-        help="Create a new session")
-new.add_argument("session",
-        metavar="session",
-        nargs="?",
-        help="Session name")
-
-# Remove
-remove = subparsers.add_parser("remove",
-        aliases=["rm"],
-        help="Remove a session by name")
-remove.add_argument("session",
-        metavar="session",
-        nargs="?",
-        help="Session name")
-
-# Parse the args
-args = parser.parse_args()
+# Parse args
+args = docopt(__doc__, version="0.2.0")
 
 # Get current tmux server
 server = tmuxp.Server()
@@ -86,13 +65,13 @@ def remove_session(session_name):
 sessions = list_sessions()
 
 # List the tmux sessions
-if args.command in ["list", "ls"]:
+if args["list"] or args["ls"]:
     pretty_sessions = [format_session(s) for s in sessions]
     print("\n".join(pretty_sessions));
 
 # Attach to a session
-elif args.command in ["attach", "a"]:
-    if args.session:
+elif args["attach"] or args["a"]:
+    if "session" in args:
         # Session name provided as argument
         attach_to_session(args.session)
     else:
@@ -101,8 +80,8 @@ elif args.command in ["attach", "a"]:
         attach_to_session(session_name)
 
 # Create a new session
-elif args.command in ["new", "n"]:
-    if args.session:
+elif args["new"] or args["n"]:
+    if "session" in args:
         # Session name provided as argument
         create_session(args.session)
     else:
@@ -111,8 +90,8 @@ elif args.command in ["new", "n"]:
         create_session(session_name)
 
 # Remove a session
-elif args.command in ["remove", "rm"]:
-    if args.session:
+elif args["remove"] or args["rm"]:
+    if "session" in args:
         # Session name provided as argument
         remove_session(args.session)
     else:

@@ -8,7 +8,7 @@ I wanted a simpler way to manage my tmux sessions. The built in commands are lon
 
 ## Install
 
-Currently `t` requires python 3
+`t` is compatable with both python 2 and 3
 
     sudo pip install tmux_t
 

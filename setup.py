@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name="tmux_t",
-      version="0.1.0",
+      version="0.2.0",
       description="t, The simple tmux helper.",
       url="https://github.com/giodamelio/t",
       author="Gio d'Amelio",
@@ -9,6 +9,7 @@ setup(name="tmux_t",
       scripts=["t"],
       install_requires=[
           "tmuxp",
+          "docopt"
       ],
       license="MIT",
       zip_safe=False)
