@@ -7,6 +7,7 @@ Usage:
     t (attach | a) [<session_name>]
     t (new | n) [-n, --no-attach] [<session_name>]
     t (remove | rm) [-a, --all] [<session_name>]
+    t
 
 Options:
     -v, --version   Print the version
@@ -27,7 +28,7 @@ else:
     get_input = raw_input
 
 # Parse args
-args = docopt(__doc__, version="0.3.0")
+args = docopt(__doc__, version="0.3.1")
 
 # Get current tmux server
 server = tmuxp.Server()
