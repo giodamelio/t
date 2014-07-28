@@ -22,6 +22,15 @@ attach.add_argument("session",
         nargs="?",
         help="Session name")
 
+# New
+new = subparsers.add_parser("new",
+        aliases=["n"],
+        help="Create a new session")
+new.add_argument("session",
+        metavar="session",
+        nargs="?",
+        help="Session name")
+
 # Remove
 remove = subparsers.add_parser("remove",
         aliases=["rm"],
@@ -65,6 +74,10 @@ def interactive_pick_session():
         if session.get("session_id") == "$" + session_id:
             return session.get("session_name")
 
+# Create a session
+def create_session(session_name):
+    os.system("tmux new-session -s '" + session_name + "'")
+
 # Get list of sessions
 sessions = list_sessions()
 
@@ -83,4 +96,13 @@ elif args.command in ["attach", "a"]:
         session_name = interactive_pick_session()
         attach_to_session(session_name)
 
+# Create a new session
+elif args.command in ["new", "n"]:
+    if args.session:
+        # Session name provided as argument
+        create_session(args.session)
+    else:
+        # Session name not provided
+        session_name = input("Session name: ")
+        create_session(session_name)
 
