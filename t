@@ -6,7 +6,7 @@ Usage:
     t [list | ls] [session_name]
     t [attach | a] [session_name]
     t [new | n] [session_name]
-    t [remove | rm] [session_name]
+    t [remove | rm] [-a, --all] [session_name]
 
 Options:
     -v, --version   Print the version
@@ -102,9 +102,16 @@ elif args["remove"] or args["rm"]:
         remove_session(args.session)
     else:
         # Session name not provided
-        session_name = interactive_pick_session()
-        remove_session(session_name)
-        print("'" + session_name + "' deleted")
+        if args["-a"] or args["--all"]:
+            # Delete all sessions
+            for session in sessions:
+                remove_session(session.get("session_name"))
+            print("All sessions deleted")
+        else:
+            # Delete one session
+            session_name = interactive_pick_session()
+            remove_session(session_name)
+            print("'" + session_name + "' deleted")
 
 # If no options are given, interactivly join a session
 else:

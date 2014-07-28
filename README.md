@@ -36,6 +36,6 @@ Options in square brackets are optional.
 
 ### Remove a session
 
-    $ t remove [session name]
-    $ t rm [sessions name]
+    $ t remove [-a, --all] [session name]
+    $ t rm  [-a, --all] [sessions name]
 
