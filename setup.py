@@ -6,7 +6,6 @@ setup(name="tmux_t",
       url="https://github.com/giodamelio/t",
       author="Gio d'Amelio",
       author_email="giodamelio@gmail.com",
-      packages=["tmux_t"],
       scripts=["t"],
       install_requires=[
           "tmuxp",
