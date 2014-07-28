@@ -6,6 +6,12 @@ The simple tmux helper.
 
 I wanted a simpler way to manage my tmux sessions. The built in commands are long and remembering all those options is hard. So I built `t`.
 
+## Install
+
+Currently `t` requires python 3
+
+    sudo pip install tmux_t
+
 ## Usage
 
 If you start `t` without any options, it will list current sessions and let you choose which one to connect to.
