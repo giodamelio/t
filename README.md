@@ -31,8 +31,8 @@ Options in square brackets are optional.
 
 ### Create a session
 
-    $ t new [session name]
-    $ t n [session name]
+    $ t new [-n, --no-attach] [session name]
+    $ t n [-n, --no-attach] [session name]
 
 ### Remove a session
 
