@@ -4,7 +4,7 @@ The simple tmux helper.
 
 ## Motives
 
-I wanted a simpler way to manage my tmux sessions. The build in commands are long and remembering all those options are hard. So I built `t`
+I wanted a simpler way to manage my tmux sessions. The built in commands are long and remembering all those options is hard. So I built `t`.
 
 ## Usage
 
