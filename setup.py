@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name="tmux_t",
-      version="0.2.2",
+      version="0.3.0",
       description="t, The simple tmux helper.",
       url="https://github.com/giodamelio/t",
       author="Gio d'Amelio",

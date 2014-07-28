@@ -27,7 +27,7 @@ else:
     get_input = raw_input
 
 # Parse args
-args = docopt(__doc__, version="0.2.2")
+args = docopt(__doc__, version="0.3.0")
 
 # Get current tmux server
 server = tmuxp.Server()
