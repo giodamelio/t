@@ -5,7 +5,7 @@ t, The simple tmux helper
 Usage:
     t (list | ls)
     t (attach | a) [<session_name>]
-    t (new | n) [<session_name>]
+    t (new | n) [-n, --no-attach] [<session_name>]
     t (remove | rm) [-a, --all] [<session_name>]
 
 Options:
@@ -67,8 +67,12 @@ def interactive_pick_session():
             return session.get("session_name")
 
 # Create a session
-def create_session(session_name):
-    os.system("tmux new-session -s '" + session_name + "'")
+def create_session(session_name, attach=True):
+    if attach:
+        os.system("tmux new-session -s '" + session_name + "'")
+    else:
+        os.system("tmux new-session -d -s '" + session_name + "'")
+        print("Created session '" + session_name + "'")
 
 def remove_session(session_name):
     os.system("tmux kill-session -t '" + session_name + "'")
@@ -92,11 +96,11 @@ elif args["attach"] or args["a"]:
 elif args["new"] or args["n"]:
     if args["<session_name>"]:
         # Session name provided as argument
-        create_session(args["<session_name>"])
+        create_session(args["<session_name>"], not (args["-n"] or args["--no-attach"]))
     else:
         # Session name not provided
         session_name = get_input("Session name: ")
-        create_session(session_name)
+        create_session(session_name, not (args["-n"] or args["--no-attach"]))
 
 # Remove a session
 elif args["remove"] or args["rm"]:
