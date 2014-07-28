@@ -15,6 +15,7 @@ Options:
 """
 import argparse
 import os
+import sys
 
 from docopt import docopt
 import tmuxp
@@ -40,7 +41,11 @@ def format_session(session):
 
 # List current sessions
 def list_sessions():
-    return server.list_sessions()
+    try:
+        return server.list_sessions()
+    except tmuxp.exc.TmuxpException:
+        print("No tmux sessions")
+        sys.exit(1)
 
 # Attach to a session
 def attach_to_session(session_name):
