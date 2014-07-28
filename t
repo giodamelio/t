@@ -19,8 +19,14 @@ import os
 from docopt import docopt
 import tmuxp
 
+# Make input work with poth python 2 and 3
+if sys.version_info[0] >= 3:
+    get_input = input
+else:
+    get_input = raw_input
+
 # Parse args
-args = docopt(__doc__, version="0.2.1")
+args = docopt(__doc__, version="0.2.2")
 
 # Get current tmux server
 server = tmuxp.Server()
@@ -47,7 +53,7 @@ def interactive_pick_session():
     print("\n".join(pretty_sessions));
 
     # Get session id
-    session_id = input("Pick session by id: ")
+    session_id = get_input("Pick session by id: ")
 
     # Loop through sessions to by id
     for session in sessions:
@@ -86,7 +92,7 @@ elif args["new"] or args["n"]:
         create_session(args.session)
     else:
         # Session name not provided
-        session_name = input("Session name: ")
+        session_name = get_input("Session name: ")
         create_session(session_name)
 
 # Remove a session
