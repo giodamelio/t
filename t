@@ -3,10 +3,10 @@
 t, The simple tmux helper
 
 Usage:
-    t [list | ls] [session_name]
-    t [attach | a] [session_name]
-    t [new | n] [session_name]
-    t [remove | rm] [-a, --all] [session_name]
+    t (list | ls)
+    t (attach | a) [<session_name>]
+    t (new | n) [<session_name>]
+    t (remove | rm) [-a, --all] [<session_name>]
 
 Options:
     -v, --version   Print the version
@@ -80,9 +80,9 @@ if args["list"] or args["ls"]:
 
 # Attach to a session
 elif args["attach"] or args["a"]:
-    if args["session_name"]:
+    if args["<session_name>"]:
         # Session name provided as argument
-        attach_to_session(args.session)
+        attach_to_session(args["<session_name>"])
     else:
         # Session name not provided
         session_name = interactive_pick_session()
@@ -90,9 +90,9 @@ elif args["attach"] or args["a"]:
 
 # Create a new session
 elif args["new"] or args["n"]:
-    if args["session_name"]:
+    if args["<session_name>"]:
         # Session name provided as argument
-        create_session(args.session)
+        create_session(args["<session_name>"])
     else:
         # Session name not provided
         session_name = get_input("Session name: ")
@@ -100,9 +100,10 @@ elif args["new"] or args["n"]:
 
 # Remove a session
 elif args["remove"] or args["rm"]:
-    if args["session_name"]:
+    if args["<session_name>"]:
         # Session name provided as argument
-        remove_session(args.session)
+        remove_session(args["<session_name>"])
+        print("'" + args["<session_name>"] + "' deleted")
     else:
         # Session name not provided
         if args["-a"] or args["--all"]:
