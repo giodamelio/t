@@ -34,9 +34,10 @@ new.add_argument("session",
 # Remove
 remove = subparsers.add_parser("remove",
         aliases=["rm"],
-        help="Delete to session by name")
+        help="Remoce a session by name")
 remove.add_argument("session",
         metavar="session",
+        nargs="?",
         help="Session name")
 
 # Parse the args
@@ -78,6 +79,9 @@ def interactive_pick_session():
 def create_session(session_name):
     os.system("tmux new-session -s '" + session_name + "'")
 
+def remove_session(session_name):
+    os.system("tmux kill-session -t '" + session_name + "'")
+
 # Get list of sessions
 sessions = list_sessions()
 
@@ -105,4 +109,16 @@ elif args.command in ["new", "n"]:
         # Session name not provided
         session_name = input("Session name: ")
         create_session(session_name)
+
+# Remove a session
+elif args.command in ["remove", "rm"]:
+    if args.session:
+        # Session name provided as argument
+        remove_session(args.session)
+    else:
+        # Session name not provided
+        session_name = interactive_pick_session()
+        remove_session(session_name)
+        print("'" + session_name + "' deleted")
+
 
