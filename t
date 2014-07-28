@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 """
 t, The simple tmux helper
 
@@ -44,7 +44,7 @@ def list_sessions():
     try:
         return server.list_sessions()
     except tmuxp.exc.TmuxpException:
-        print("No tmux sessions")
+        print("No tmux server running...")
         sys.exit(1)
 
 # Attach to a session
@@ -54,6 +54,7 @@ def attach_to_session(session_name):
 # Interactivly pick a session
 def interactive_pick_session():
     # List sessions
+    sessions = list_sessions()
     pretty_sessions = [format_session(s) for s in sessions]
     print("\n".join(pretty_sessions));
 
@@ -72,17 +73,14 @@ def create_session(session_name):
 def remove_session(session_name):
     os.system("tmux kill-session -t '" + session_name + "'")
 
-# Get list of sessions
-sessions = list_sessions()
-
 # List the tmux sessions
 if args["list"] or args["ls"]:
-    pretty_sessions = [format_session(s) for s in sessions]
+    pretty_sessions = [format_session(s) for s in list_sessions()]
     print("\n".join(pretty_sessions));
 
 # Attach to a session
 elif args["attach"] or args["a"]:
-    if "session" in args:
+    if args["session_name"]:
         # Session name provided as argument
         attach_to_session(args.session)
     else:
@@ -92,7 +90,7 @@ elif args["attach"] or args["a"]:
 
 # Create a new session
 elif args["new"] or args["n"]:
-    if "session" in args:
+    if args["session_name"]:
         # Session name provided as argument
         create_session(args.session)
     else:
@@ -102,14 +100,14 @@ elif args["new"] or args["n"]:
 
 # Remove a session
 elif args["remove"] or args["rm"]:
-    if "session" in args:
+    if args["session_name"]:
         # Session name provided as argument
         remove_session(args.session)
     else:
         # Session name not provided
         if args["-a"] or args["--all"]:
             # Delete all sessions
-            for session in sessions:
+            for session in list_sessions():
                 remove_session(session.get("session_name"))
             print("All sessions deleted")
         else:
