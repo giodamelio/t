@@ -34,7 +34,7 @@ new.add_argument("session",
 # Remove
 remove = subparsers.add_parser("remove",
         aliases=["rm"],
-        help="Remoce a session by name")
+        help="Remove a session by name")
 remove.add_argument("session",
         metavar="session",
         nargs="?",
