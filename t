@@ -20,7 +20,7 @@ from docopt import docopt
 import tmuxp
 
 # Parse args
-args = docopt(__doc__, version="0.2.0")
+args = docopt(__doc__, version="0.2.1")
 
 # Get current tmux server
 server = tmuxp.Server()
@@ -51,7 +51,7 @@ def interactive_pick_session():
 
     # Loop through sessions to by id
     for session in sessions:
-        if session.get("session_id") == "$" + session_id:
+        if session.get("session_id") == "$" + str(session_id):
             return session.get("session_name")
 
 # Create a session
