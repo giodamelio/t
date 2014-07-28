@@ -121,4 +121,8 @@ elif args.command in ["remove", "rm"]:
         remove_session(session_name)
         print("'" + session_name + "' deleted")
 
+# If no options are given, interactivly join a session
+else:
+    session_name = interactive_pick_session()
+    attach_to_session(session_name)
 
