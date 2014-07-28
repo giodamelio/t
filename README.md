@@ -10,7 +10,7 @@ I wanted a simpler way to manage my tmux sessions. The built in commands are lon
 
 `t` is compatable with both python 2 and 3
 
-    sudo pip install tmux_t
+    pip install --user tmux_t
 
 ## Usage
 
